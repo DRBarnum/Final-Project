@@ -23,10 +23,18 @@ class Kong(App):
         super().__init__(width, height)
         black=Color(1, 0)
         Black=Color(0, 1)
+        self.odd = [1, 3, 5, 7, 9]
         noline=LineStyle(1000, Black)
         bg_asset=RectangleAsset(width, height, noline, black)
         bg=Sprite(bg_asset, (0, 0))
-    
+        self.b = 0
+
+    def step(self):
+        self.b = self.b+1
+        if self.b > 10:
+            self.b = 0
+        if self.b == self.odd:
+            Barrel(100, 100)
 
 myapp = Kong(SCREEN_WIDTH, SCREEN_HEIGHT)
 myapp.run()
