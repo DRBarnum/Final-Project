@@ -188,6 +188,7 @@ class laddeR(Sprite):
         self.fxcenter = self.fycenter = 0
         
 class player(Sprite):
+    brown = 
     
 
     
