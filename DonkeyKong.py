@@ -28,22 +28,30 @@ class Kong(App):
         super().__init__(width, height)
         black=Color(1, 0)
         Black=Color(0, 1)
+        Red = Color(0xF44366, 1.0)
         noline=LineStyle(1000, Black)
+        oline= LineStyle(0, Red)
+        Blue = Color(0x558b24, 1.0)
+        self.play = False
         bg_asset=RectangleAsset(width, height, noline, black)
         bg=Sprite(bg_asset, (0, 0))
-        Wall((0,0))
-        wall((0,0))
-        wAll((0,0))
-        waLl((0,0))
-        ladder((600, 550))
-        Ladder((300, 515))
-        lAdder((350, 309))
-        laDder((100, 348))
-        ladDer((220, 150))
-        laddEr((270, 150))
-        laddeR((600, 150))
+        Wall(PolygonAsset([(0, 670), (0, 700), (700, 680), (700, 650)], oline, Red))
+        Wall(PolygonAsset([(0, 480), (0, 510), (600, 580), (600, 550)], oline, Red))
+        Wall(PolygonAsset([(100, 380), (100, 350), (700, 260), (700, 290)], oline, Red))
+        Wall(PolygonAsset([(0, 150), (0, 180), (600, 180), (600, 150)], oline, Red))
+        ladder(RectangleAsset(10, 140, oline, Blue), (600, 515))
+        ladder(RectangleAsset(10, 150, oline, Blue),(300, 515))
+        ladder(RectangleAsset(10, 150, oline, Blue), (350, 309))
+        ladder(RectangleAsset(10, 150, oline, Blue), (100, 348))
+        ladder(RectangleAsset(10, 150, oline, Blue), (220, 150))
+        ladder(RectangleAsset(10, 150, oline, Blue), (270, 150))
+        ladder(RectangleAsset(10, 150, oline, Blue), (600, 150))
+        Kong.listenKeyEvent("keydown", "p", self.playing)
         
-        
+    def playing(self, event):
+        if self.play == False:
+            player((50, 600))
+            self.play = True
 
             
             
@@ -51,64 +59,22 @@ class Kong(App):
 class Wall(Sprite):
     Red = Color(0xF44366, 1.0)
     noline = LineStyle(0, Red)
-    asset = PolygonAsset([(0, 670), (0, 700), (700, 680), (700, 650)], noline, Red)
+
     
-    
-    def __init__(self, position):
-        super().__init__(Wall.asset, position)
+    def __init__(self, asset):
+        super().__init__(asset, (0,0))
         self.vx = 0
         self.vy = 0
         self.vr = 0
         self.fxcenter = self.fycenter = 0
         
-    
         
-class wall(Sprite):
-    Red = Color(0xF44366, 1.0)
-    noline = LineStyle(0, Red) 
-    Asset = PolygonAsset([(0, 480), (0, 510), (600, 580), (600, 550)], noline, Red) 
-
-    
-    def __init__(self, position):
-        super().__init__(wall.Asset, position)
-        self.vx = 0
-        self.vy = 0
-        self.vr = 0
-        self.fxcenter = self.fycenter = 0
-        
-class wAll(Sprite):
-    Red = Color(0xF44366, 1.0)
-    noline = LineStyle(0, Red) 
-    Asset = PolygonAsset([(100, 380), (100, 350), (700, 260), (700, 290)], noline, Red) 
-
-    
-    def __init__(self, position):
-        super().__init__(wAll.Asset, position)
-        self.vx = 0
-        self.vy = 0
-        self.vr = 0
-        self.fxcenter = self.fycenter = 0
-        
-class waLl(Sprite):
-    Red = Color(0xF44366, 1.0)
-    noline = LineStyle(0, Red) 
-    Asset = PolygonAsset([(0, 150), (0, 180), (600, 180), (600, 150)], noline, Red) 
-
-    
-    def __init__(self, position):
-        super().__init__(waLl.Asset, position)
-        self.vx = 0
-        self.vy = 0
-        self.vr = 0
-        self.fxcenter = self.fycenter = 0
-
 class ladder(Sprite):
     Blue = Color(0x558b24, 1.0)
     noline = LineStyle(0, Blue)
-    Asset = RectangleAsset(10, 105, noline, Blue)
     
-    def __init__(self, position):
-        super().__init__(ladder.Asset, position)
+    def __init__(self, asset, position):
+        super().__init__(asset, position)
         self.vx = 0
         self.vy = 0
         self.vr = 0
@@ -166,10 +132,10 @@ class ladDer(Sprite):
 class laddEr(Sprite):
     Blue = Color(0x558b24, 1.0)
     noline = LineStyle(0, Blue)
-    Asset = RectangleAsset(10, 145, noline, Blue)
+    Asset = RectangleAsset(10, 175, noline, Blue)
     
     def __init__(self, position):
-        super().__init__(laDder.Asset, position)
+        super().__init__(laddEr.Asset, position)
         self.vx = 0
         self.vy = 0
         self.vr = 0
@@ -188,11 +154,95 @@ class laddeR(Sprite):
         self.fxcenter = self.fycenter = 0
         
 class player(Sprite):
-    brown = 
-    
+    purple = Color(0x9575cd, 1.0)
+    white = Color(0xfafafa, 1.0)
+    line= LineStyle(1, white)
+    asset = RectangleAsset(25, 25, line, purple)
 
+    def __init__(self, position):
+        super().__init__(player.asset, position)
+        self.vx = 0
+        self.vy = 5
+        self.vr = 0
+        self.a = self.collidingWithSprites(Wall)
+        self.fxcenter = self.fycenter = 0.25
+        self.YourDad = True
+        self.YourUncle = False
+        self.You = False
+        Kong.listenKeyEvent("keydown", "right arrow", self.MoveRIGHT)
+        Kong.listenKeyEvent("keyup", "right arrow", self.MoveOff)
+        Kong.listenKeyEvent("keydown", "left arrow", self.MoveLEFT)
+        Kong.listenKeyEvent("keyup", "left arrow", self.MoveOff)
+        Kong.listenKeyEvent("keydown", "up arrow", self.JumpOn)
+        Kong.listenKeyEvent("keyup", "up arrow", self.JumpOff)
+        Kong.listenKeyEvent("keydown", "right arrow", self.falling)
+        Kong.listenKeyEvent("keydown", "left arrow", self.falling)
+       
+
+    def step(self):
+        self.vy = self.vy + 1.25
+        self.y += self.vy
+        self.a = self.collidingWithSprites(Wall)
+        if len(self.a) != 0:
+            self.y -= self.vy
+            self.vy = 0
+            self.YourDad = False
+        else:
+            self.YourDad = True
+        if self.You == True:
+            self.vy = -30
+            self.You = False
+        if self.YourDad == True:
+            self.YourUncle = True
+        else:
+            self.YourUncle = False
+        self.x += self.vx
+        self.a = self.collidingWithSprites(Wall)
+        if len(self.a) != 0:
+            self.x -= self.vx
+            self.vx = 0
+            self.YourDad = False
+        else:
+            self.YourDad = True
+
+    def falling(self, event):
+        if self.YourDad == True:
+            self.vy = self.vy + 1 
     
+    def MoveRIGHT(self, event):
+        if len(self.a) == 0:
+            self.YourDad = True
+        if self.YourDad == False:
+            self.vx = 5
+        else:
+            self.vx = 5
+            self.vy = 5
     
+    def MoveLEFT(self, event):
+        if len(self.a) == 0:
+            self.YourDad = True
+        if self.YourDad == False:
+            self.vx = -5
+        else:
+            self.vx = -5
+            self.vy = 5
+        
+    def MoveOff(self, event):
+        self.vx = 0
+        self.vy = 5
+
+    def JumpOn(self, event):
+        if len(self.a) == 0:
+            self.YourDad = True
+        if self.YourUncle == False:
+            if self.YourDad == True:
+                self.vy = -15
+        else:
+            self.vy = 5
+
+    def JumpOff(self, event):
+        self. vy = self.vy + 1
+        
             
 
 myapp = Kong(SCREEN_WIDTH, SCREEN_HEIGHT)
