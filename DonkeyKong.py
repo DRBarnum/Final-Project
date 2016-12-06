@@ -26,32 +26,43 @@ class Kong(App):
     
     def __init__(self, width, height):
         super().__init__(width, height)
-        black=Color(1, 0)
-        Black=Color(0, 1)
-        Red = Color(0xF44366, 1.0)
-        noline=LineStyle(1000, Black)
-        oline= LineStyle(0, Red)
-        Blue = Color(0x558b24, 1.0)
+        black = Color(0, 1)
+        yellow = Color(0xffeb3b, 1.0)
+        white = Color(0xfafafa, 1.0)
+        liner = LineStyle(1, white)
+        line = LineStyle(1, black)
         self.play = False
-        bg_asset=RectangleAsset(width, height, noline, black)
+        self.text = TextAsset("Press ENTER To Start", 500 px ComicSans)
+        bg_asset=RectangleAsset(width, height, line, black)
         bg=Sprite(bg_asset, (0, 0))
-        Wall(PolygonAsset([(0, 670), (0, 700), (700, 680), (700, 650)], oline, Red))
-        Wall(PolygonAsset([(0, 480), (0, 510), (600, 580), (600, 550)], oline, Red))
-        Wall(PolygonAsset([(100, 380), (100, 350), (700, 260), (700, 290)], oline, Red))
-        Wall(PolygonAsset([(0, 150), (0, 180), (600, 180), (600, 150)], oline, Red))
-        ladder(RectangleAsset(10, 140, oline, Blue), (600, 515))
-        ladder(RectangleAsset(10, 150, oline, Blue),(300, 515))
-        ladder(RectangleAsset(10, 150, oline, Blue), (350, 309))
-        ladder(RectangleAsset(10, 150, oline, Blue), (100, 348))
-        ladder(RectangleAsset(10, 150, oline, Blue), (220, 150))
-        ladder(RectangleAsset(10, 150, oline, Blue), (270, 150))
-        ladder(RectangleAsset(10, 150, oline, Blue), (600, 150))
-        Kong.listenKeyEvent("keydown", "p", self.playing)
+        Kong.listenKeyEvent("keydown", "enter", self.playing)
         
     def playing(self, event):
-        if self.play == False:
-            player((50, 600))
-            self.play = True
+        self.play = True
+        if self.play == True:
+            player((50, 640))
+            black=Color(1, 0)
+            Black=Color(0, 1)
+            Red = Color(0xF44366, 1.0)
+            noline=LineStyle(1000, Black)
+            oline= LineStyle(0, Red)
+            Blue = Color(0x558b24, 1.0)
+            Wall(PolygonAsset([(0, 670), (0, 700), (700, 680), (700, 650)], oline, Red))
+            Wall(PolygonAsset([(0, 480), (0, 510), (600, 580), (600, 550)], oline, Red))
+            Wall(PolygonAsset([(100, 380), (100, 350), (700, 260), (700, 290)], oline, Red))
+            Wall(PolygonAsset([(0, 150), (0, 180), (600, 180), (600, 150)], oline, Red))
+            ladder(RectangleAsset(10, 105, oline, Blue), (600, 550))
+            ladder(RectangleAsset(10, 150, oline, Blue),(300, 515))
+            ladder(RectangleAsset(10, 215, oline, Blue), (350, 309))
+            ladder(RectangleAsset(10, 150, oline, Blue), (100, 348))
+            ladder(RectangleAsset(10, 100, oline, Blue), (220, 150))
+            ladder(RectangleAsset(10, 175, oline, Blue), (270, 150))
+            ladder(RectangleAsset(10, 125, oline, Blue), (600, 150))
+            
+            
+   
+        
+            
 
             
             
