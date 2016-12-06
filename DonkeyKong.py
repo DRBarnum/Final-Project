@@ -1,5 +1,5 @@
 import ggame
-from ggame import App, RectangleAsset, ImageAsset, Sprite, LineStyle, Color, Frame, CircleAsset, PolygonAsset
+from ggame import App, RectangleAsset, ImageAsset, Sprite, LineStyle, Color, Frame, CircleAsset, PolygonAsset, TextAsset
 
 SCREEN_WIDTH = 700
 SCREEN_HEIGHT = 700
@@ -32,7 +32,13 @@ class Kong(App):
         liner = LineStyle(1, white)
         line = LineStyle(1, black)
         self.play = False
-        self.text = TextAsset("Press ENTER To Start", 500 px ComicSans)
+    
+ 
+        self.style= (500, Arial)
+        self.width = (100)
+        self.fill = (yellow, 1.0)
+        self.line = (liner, center)
+        self.text = (self, "Press ENTER To Start", 500, ComicSans)
         bg_asset=RectangleAsset(width, height, line, black)
         bg=Sprite(bg_asset, (0, 0))
         Kong.listenKeyEvent("keydown", "enter", self.playing)
