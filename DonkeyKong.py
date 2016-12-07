@@ -32,12 +32,20 @@ class Kong(App):
         liner = LineStyle(1, white)
         line = LineStyle(1, black)
         self.play = False
+        self.x = 50
+        self.y = 250
+        self.ComicSans = True
         bg_asset=RectangleAsset(width, height, line, black)
         bg=Sprite(bg_asset, (0, 0))
-        text = TextAsset("Press ENTER To Start", style='40pt Comic Sans MS', fill= Color(0xffeb3b, 1), width=500)
-        Sprite(text,(100,250))
+        text = TextAsset("Press ENTER To Start", style='40pt Comic Sans MS', fill= Color(0xffeb3b, 1), width=700)
+        self.prompt = Sprite(text,(self.x, self.y))
         Kong.listenKeyEvent("keydown", "enter", self.playing)
+        Kong.listenKeyEvent("keyup", "enter", self.sans)
         
+    def sans(self,event):
+        self.prompt.destroy()
+
+
     def playing(self, event):
         self.play = True
         if self.play == True:
@@ -59,6 +67,7 @@ class Kong(App):
             ladder(RectangleAsset(10, 100, oline, Blue), (220, 150))
             ladder(RectangleAsset(10, 175, oline, Blue), (270, 150))
             ladder(RectangleAsset(10, 125, oline, Blue), (600, 150))
+
             
             
    
