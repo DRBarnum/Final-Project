@@ -40,13 +40,14 @@ class Kong(App):
         text = TextAsset("Press ENTER To Start", style='40pt Comic Sans MS', fill= Color(0xffeb3b, 1), width=700)
         self.prompt = Sprite(text,(self.x, self.y))
         Kong.listenKeyEvent("keydown", "enter", self.playing)
-        Kong.listenKeyEvent("keyup", "enter", self.sans)
+        #Kong.listenKeyEvent("keyup", "enter", self.sans)
         
     def sans(self,event):
         self.prompt.destroy()
 
 
     def playing(self, event):
+        self.sans(0)
         self.play = True
         if self.play == True:
             player((50, 640))
