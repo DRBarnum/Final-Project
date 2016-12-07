@@ -34,13 +34,15 @@ class Kong(App):
         self.play = False
     
  
-        self.style= (500, Arial)
-        self.width = (100)
-        self.fill = (yellow, 1.0)
-        self.line = (liner, center)
-        self.text = (self, "Press ENTER To Start", 500, ComicSans)
-        bg_asset=RectangleAsset(width, height, line, black)
-        bg=Sprite(bg_asset, (0, 0))
+        text = TextAsset("Press ENTER To Start", style='comic sans')
+        Sprite(text,(100,100))
+        #self.style= (500, ComicSans)
+        #self.width = (100)
+        #self.fill = (yellow, 1.0)
+        #self.line = (liner, center)
+        #self.text = (self, "Press ENTER To Start", 500, ComicSans)
+        #bg_asset=RectangleAsset(width, height, line, black)
+        #bg=Sprite(bg_asset, (0, 0))
         Kong.listenKeyEvent("keydown", "enter", self.playing)
         
     def playing(self, event):
