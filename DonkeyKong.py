@@ -32,15 +32,13 @@ class Kong(App):
         liner = LineStyle(1, white)
         line = LineStyle(1, black)
         self.play = False
-        self.x = 50
-        self.y = 250
         self.ComicSans = True
         bg_asset=RectangleAsset(width, height, line, black)
         bg=Sprite(bg_asset, (0, 0))
         text = TextAsset("Press ENTER To Start", style='40pt Comic Sans MS', fill= Color(0xffeb3b, 1), width=700)
-        self.prompt = Sprite(text,(self.x, self.y))
+        self.prompt = Sprite(text,(50, 250))
         Kong.listenKeyEvent("keydown", "enter", self.playing)
-        #Kong.listenKeyEvent("keyup", "enter", self.sans)
+
         
     def sans(self,event):
         self.prompt.destroy()
@@ -69,14 +67,6 @@ class Kong(App):
             ladder(RectangleAsset(10, 175, oline, Blue), (270, 150))
             ladder(RectangleAsset(10, 125, oline, Blue), (600, 150))
 
-            
-            
-   
-        
-            
-
-            
-            
 # THE WALLS
 class Wall(Sprite):
     Red = Color(0xF44366, 1.0)
@@ -101,80 +91,7 @@ class ladder(Sprite):
         self.vy = 0
         self.vr = 0
         self.fxcenter = self.fycenter = 0
-        
-class Ladder(Sprite):
-    Blue = Color(0x558b24, 1.0)
-    noline = LineStyle(0, Blue)
-    Asset = RectangleAsset(10, 150, noline, Blue)
-    
-    def __init__(self, position):
-        super().__init__(Ladder.Asset, position)
-        self.vx = 0
-        self.vy = 0
-        self.vr = 0
-        self.fxcenter = self.fycenter = 0
-        
-class lAdder(Sprite):
-    Blue = Color(0x558b24, 1.0)
-    noline = LineStyle(0, Blue)
-    Asset = RectangleAsset(10, 213, noline, Blue)
-    
-    def __init__(self, position):
-        super().__init__(lAdder.Asset, position)
-        self.vx = 0
-        self.vy = 0
-        self.vr = 0
-        self.fxcenter = self.fycenter = 0
-        
-        
-class laDder(Sprite):
-    Blue = Color(0x558b24, 1.0)
-    noline = LineStyle(0, Blue)
-    Asset = RectangleAsset(10, 145, noline, Blue)
-    
-    def __init__(self, position):
-        super().__init__(laDder.Asset, position)
-        self.vx = 0
-        self.vy = 0
-        self.vr = 0
-        self.fxcenter = self.fycenter = 0
-        
-class ladDer(Sprite):
-    Blue = Color(0x558b24, 1.0)
-    noline = LineStyle(0, Blue)
-    Asset = RectangleAsset(10, 70, noline, Blue)
-    
-    def __init__(self, position):
-        super().__init__(ladDer.Asset, position)
-        self.vx = 0
-        self.vy = 0
-        self.vr = 0
-        self.fxcenter = self.fycenter = 0
-        
-class laddEr(Sprite):
-    Blue = Color(0x558b24, 1.0)
-    noline = LineStyle(0, Blue)
-    Asset = RectangleAsset(10, 175, noline, Blue)
-    
-    def __init__(self, position):
-        super().__init__(laddEr.Asset, position)
-        self.vx = 0
-        self.vy = 0
-        self.vr = 0
-        self.fxcenter = self.fycenter = 0
-        
-class laddeR(Sprite):
-    Blue = Color(0x558b24, 1.0)
-    noline = LineStyle(0, Blue)
-    Asset = RectangleAsset(10, 124, noline, Blue)
-    
-    def __init__(self, position):
-        super().__init__(laddeR.Asset, position)
-        self.vx = 0
-        self.vy = 0
-        self.vr = 0
-        self.fxcenter = self.fycenter = 0
-        
+
 class player(Sprite):
     purple = Color(0x9575cd, 1.0)
     white = Color(0xfafafa, 1.0)
