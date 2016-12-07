@@ -34,7 +34,7 @@ class Kong(App):
         self.play = False
     
  
-        text = TextAsset("Press ENTER To Start", style='comic sans')
+        text = TextAsset("Press ENTER To Start", style='40pt comic sans', fill= Color(0xff0000, 1), width=500)
         Sprite(text,(100,100))
         #self.style= (500, ComicSans)
         #self.width = (100)
