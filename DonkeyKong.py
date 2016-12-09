@@ -189,9 +189,9 @@ class Kong(App):
             ladder(RectangleAsset(10, 175, oline, Blue), (270, 150))
             ladder(RectangleAsset(10, 125, oline, Blue), (600, 150))
             
-#    def step(self):
-#        for ship in self.getSpritesbyClass(player):
-#            ship.step()
+    def step(self):
+        for ship in self.getSpritesbyClass(player):
+            ship.step()
 
 myapp = Kong(SCREEN_WIDTH, SCREEN_HEIGHT)
 myapp.run()
