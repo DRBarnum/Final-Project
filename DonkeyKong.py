@@ -24,7 +24,7 @@ class Barrel(Sprite):
 
 
 # THE WALLS
-class Wall(Sprite):
+class wall(Sprite):
     Red = Color(0xF44366, 1.0)
     noline = LineStyle(0, Red)
 
@@ -59,9 +59,9 @@ class player(Sprite):
         self.vx = 0
         self.vy = 5
         self.vr = 0
-        self.a = self.collidingWithSprites(Wall)
+        self.a = self.collidingWithSprites(wall)
         self.b = self.collidingWithSprites(ladder)
-        self.fxcenter = self.fycenter = 0
+        self.fxcenter = self.fycenter = 0.25
         self.YourDad = True
         self.YourUncle = False
         self.You = False
@@ -79,7 +79,7 @@ class player(Sprite):
     def step(self):
         self.vy = self.vy + 1.25
         self.y += self.vy
-        self.a = self.collidingWithSprites(Wall)
+        self.a = self.collidingWithSprites(wall)
         self.b = self.collidingWithSprites(ladder)
         if len(self.b) != 0:
             self.You = True
@@ -97,7 +97,7 @@ class player(Sprite):
         else:
             self.YourUncle = False
         self.x += self.vx
-        self.a = self.collidingWithSprites(Wall)
+        self.a = self.collidingWithSprites(wall)
         if len(self.a) != 0:
             self.x -= self.vx
             self.vx = 0
@@ -177,10 +177,10 @@ class Kong(App):
             noline=LineStyle(1000, Black)
             oline= LineStyle(0, Red)
             Blue = Color(0x558b24, 1.0)
-            Wall(PolygonAsset([(0, 670), (0, 700), (700, 680), (700, 650)], oline, Red))
-            Wall(PolygonAsset([(0, 480), (0, 510), (600, 580), (600, 550)], oline, Red))
-            Wall(PolygonAsset([(100, 380), (100, 350), (700, 260), (700, 290)], oline, Red))
-            Wall(PolygonAsset([(0, 150), (0, 180), (600, 180), (600, 150)], oline, Red))
+            wall(PolygonAsset([(0, 670), (0, 700), (700, 680), (700, 650)], oline, Red))
+            wall(PolygonAsset([(0, 480), (0, 510), (600, 580), (600, 550)], oline, Red))
+            wall(PolygonAsset([(100, 380), (100, 350), (700, 260), (700, 290)], oline, Red))
+            wall(PolygonAsset([(0, 150), (0, 180), (600, 180), (600, 150)], oline, Red))
             ladder(RectangleAsset(10, 105, oline, Blue), (600, 550))
             ladder(RectangleAsset(10, 150, oline, Blue),(300, 515))
             ladder(RectangleAsset(10, 215, oline, Blue), (350, 309))
