@@ -80,7 +80,7 @@ class player(Sprite):
         self.vy = self.vy + 1.25
         self.y += self.vy
         self.a = self.collidingWithSprites(Wall)
-        self.b = self.collidingWithSprites(Spring)
+        self.b = self.collidingWithSprites(ladder)
         if len(self.b) != 0:
             self.You = True
         if len(self.a) != 0:
