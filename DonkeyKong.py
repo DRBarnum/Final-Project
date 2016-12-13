@@ -20,17 +20,14 @@ class Barrel(Sprite):
         self.vr = 0
         self.fxcenter = self.fycenter = 0
 
-    
-
-
 # THE WALLS
 class wall(Sprite):
     Red = Color(0xF44366, 1.0)
     noline = LineStyle(0, Red)
 
     
-    def __init__(self, asset):
-        super().__init__(asset, (0,0))
+    def __init__(self, asset, position):
+        super().__init__(asset, position)
         self.vx = 0
         self.vy = 0
         self.vr = 0
@@ -143,6 +140,18 @@ class player(Sprite):
     def JumpOff(self, event):
         self. vy = self.vy + 1
 
+class trophy(Sprite):
+    yellow = Color(0xffca28, 1.0)
+    white = Color(0xfafafa, 1.0)
+    liner = LineStyle(1, white)
+    
+    def __init__(self, asset, position):
+        super().__init__(asset, position)
+        self.vx = 0
+        self.vy = 0
+        self.vr = 0
+        self.fxcenter = self.fycenter = 0
+    
 
 # THE WORLD
 class Kong(App):
@@ -162,10 +171,6 @@ class Kong(App):
         self.prompt = Sprite(text,(50, 250))
         Kong.listenKeyEvent("keydown", "enter", self.playing)
 
-        
-
-
-
     def playing(self, event):
         self.prompt.destroy()
         self.play = True
@@ -176,18 +181,24 @@ class Kong(App):
             Red = Color(0xF44366, 1.0)
             noline=LineStyle(1000, Black)
             oline= LineStyle(0, Red)
+            white = Color(0xfafafa, 1.0)
+            yellow = Color(0xffca28, 1.0)
+            liner = LineStyle(1, white)
             Blue = Color(0x558b24, 1.0)
-            wall(PolygonAsset([(0, 670), (0, 700), (700, 680), (700, 650)], oline, Red))
-            wall(PolygonAsset([(0, 480), (0, 510), (600, 580), (600, 550)], oline, Red))
-            wall(PolygonAsset([(100, 380), (100, 350), (700, 260), (700, 290)], oline, Red))
-            wall(PolygonAsset([(0, 150), (0, 180), (600, 180), (600, 150)], oline, Red))
-            ladder(RectangleAsset(10, 105, oline, Blue), (600, 550))
-            ladder(RectangleAsset(10, 150, oline, Blue),(300, 515))
-            ladder(RectangleAsset(10, 215, oline, Blue), (350, 309))
-            ladder(RectangleAsset(10, 150, oline, Blue), (100, 348))
-            ladder(RectangleAsset(10, 100, oline, Blue), (220, 150))
-            ladder(RectangleAsset(10, 175, oline, Blue), (270, 150))
-            ladder(RectangleAsset(10, 125, oline, Blue), (600, 150))
+            wall(RectangleAsset(700, 30, oline, Red), (0, 670))
+            wall(RectangleAsset(550, 30, oline, Red), (0, 500))
+            wall(RectangleAsset(550, 30, oline, Red), (150, 330))
+            wall(RectangleAsset(600, 30, oline, Red), (0, 160))
+            wall(RectangleAsset(100, 30, oline, Red), (100, 50))
+            ladder(RectangleAsset(10, 170, oline, Blue), (550, 500))
+            ladder(RectangleAsset(10, 170, oline, Blue), (300, 500))
+            ladder(RectangleAsset(10, 170, oline, Blue), (400, 330))
+            ladder(RectangleAsset(10, 170, oline, Blue), (150, 330))
+            ladder(RectangleAsset(10, 100, oline, Blue), (250, 160))
+            ladder(RectangleAsset(10, 170, oline, Blue), (330, 160))
+            ladder(RectangleAsset(10, 170, oline, Blue), (600, 160))
+            ladder(RectangleAsset(10, 110, oline, Blue), (150, 50))
+            trophy(RectangleAsset(25, 25, liner, yellow), (100, 25))
             
     def step(self):
         for ship in self.getSpritesbyClass(player):
