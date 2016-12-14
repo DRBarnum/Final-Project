@@ -71,6 +71,7 @@ class player(Sprite):
         Kong.listenKeyEvent("keyup", "up arrow", self.JumpOff)
         Kong.listenKeyEvent("keydown", "right arrow", self.falling)
         Kong.listenKeyEvent("keydown", "left arrow", self.falling)
+
        
 
     def step(self):
@@ -80,15 +81,14 @@ class player(Sprite):
         self.b = self.collidingWithSprites(ladder)
         if len(self.b) != 0:
             self.You = True
+        if len(self.b) == 0:
+            self.You == False
         if len(self.a) != 0:
             self.y -= self.vy
             self.vy = 0
             self.YourDad = False
         else:
             self.YourDad = True
-        if self.You == True:
-            self.vy = -30
-            self.You = False
         if self.YourDad == True:
             self.YourUncle = True
         else:
@@ -102,6 +102,8 @@ class player(Sprite):
         else:
             self.YourDad = True
 
+    
+    
     def falling(self, event):
         if self.YourDad == True:
             self.vy = self.vy + 1 
@@ -129,16 +131,21 @@ class player(Sprite):
         self.vy = 5
 
     def JumpOn(self, event):
+        if self.You == True:
+            self.vy = -5
         if len(self.a) == 0:
             self.YourDad = True
         if self.YourUncle == False:
             if self.YourDad == True:
-                self.vy = -15
+                self.vy = -18
         else:
             self.vy = 5
 
     def JumpOff(self, event):
         self. vy = self.vy + 1
+        
+
+    
 
 class trophy(Sprite):
     yellow = Color(0xffca28, 1.0)
