@@ -73,32 +73,35 @@ class player(Sprite):
        
 
     def step(self):
-        self.a = self.collidingWithSprites(wall)
         self.b = self.collidingWithSprites(ladder)
         if len(self.b) != 0:
-            self.You = True
-        if len(self.b) == 0:
+            pass
+        else:
             self.vy = self.vy + 1.25
-            self.You == False
-        self.y += self.vy
-        if len(self.a) != 0:
-            self.y -= self.vy
-            self.vy = 1
-            self.YourDad = False
-        else:
-            self.YourDad = True
-        if self.YourDad == True:
-            self.YourUncle = True
-        else:
-            self.YourUncle = False
-        self.x += self.vx
-        self.a = self.collidingWithSprites(wall)
-        if len(self.a) != 0:
-            self.x -= self.vx
-            self.vx = 0
-            self.YourDad = False
-        else:
-            self.YourDad = True
+            self.y += self.vy
+            self.a = self.collidingWithSprites(wall)
+            if len(self.b) != 0:
+                self.You = True
+            if len(self.b) == 0:
+                self.You == False
+            if len(self.a) != 0:
+                self.y -= self.vy
+                self.vy = 1
+                self.YourDad = False
+            else:
+                self.YourDad = True
+            if self.YourDad == True:
+                self.YourUncle = True
+            else:
+                self.YourUncle = False
+            self.x += self.vx
+            self.a = self.collidingWithSprites(wall)
+            if len(self.a) != 0:
+                self.x -= self.vx
+                self.vx = 0
+                self.YourDad = False
+            else:
+                self.YourDad = True
     
     def falling(self, event):
         if self.YourDad == True:
