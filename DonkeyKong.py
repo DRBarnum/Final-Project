@@ -19,7 +19,6 @@ class Barrel(Sprite):
         self.vy = 0
         self.vr = 0
         self.fxcenter = self.fycenter = 0
-
 # THE WALLS
 class wall(Sprite):
     Red = Color(0xF44366, 1.0)
@@ -32,8 +31,7 @@ class wall(Sprite):
         self.vy = 0
         self.vr = 0
         self.fxcenter = self.fycenter = 0
-        
-        
+# LADDER
 class ladder(Sprite):
     Blue = Color(0x558b24, 1.0)
     noline = LineStyle(0, Blue)
@@ -44,7 +42,7 @@ class ladder(Sprite):
         self.vy = 0
         self.vr = 0
         self.fxcenter = self.fycenter = 0
-
+# PLAYER
 class player(Sprite):
     purple = Color(0x9575cd, 1.0)
     white = Color(0xfafafa, 1.0)
@@ -75,17 +73,17 @@ class player(Sprite):
        
 
     def step(self):
-        self.vy = self.vy + 1.25
-        self.y += self.vy
         self.a = self.collidingWithSprites(wall)
         self.b = self.collidingWithSprites(ladder)
         if len(self.b) != 0:
             self.You = True
         if len(self.b) == 0:
+            self.vy = self.vy + 1.25
             self.You == False
+        self.y += self.vy
         if len(self.a) != 0:
             self.y -= self.vy
-            self.vy = 0
+            self.vy = 1
             self.YourDad = False
         else:
             self.YourDad = True
@@ -101,12 +99,10 @@ class player(Sprite):
             self.YourDad = False
         else:
             self.YourDad = True
-
-    
     
     def falling(self, event):
         if self.YourDad == True:
-            self.vy = self.vy + 1 
+            self.vy = self.vy + 1
     
     def MoveRIGHT(self, event):
         if len(self.a) == 0:
@@ -143,10 +139,7 @@ class player(Sprite):
 
     def JumpOff(self, event):
         self. vy = self.vy + 1
-        
-
-    
-
+#TROPY
 class trophy(Sprite):
     yellow = Color(0xffca28, 1.0)
     white = Color(0xfafafa, 1.0)
@@ -158,8 +151,6 @@ class trophy(Sprite):
         self.vy = 0
         self.vr = 0
         self.fxcenter = self.fycenter = 0
-    
-
 # THE WORLD
 class Kong(App):
     
@@ -210,6 +201,6 @@ class Kong(App):
     def step(self):
         for ship in self.getSpritesbyClass(player):
             ship.step()
-
+# I DON'T KNOW WHAT THIS IS BUT I NEED IT
 myapp = Kong(SCREEN_WIDTH, SCREEN_HEIGHT)
 myapp.run()
