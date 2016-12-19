@@ -76,7 +76,6 @@ class player(Sprite):
         self.b = self.collidingWithSprites(ladder)
         if len(self.b) != 0:
             self.You = True
-            self.vy = -
             self.y += self.vy
             self.a = self.collidingWithSprites(wall)
             if len(self.a) != 0:
@@ -97,10 +96,7 @@ class player(Sprite):
                 self.YourDad = False
             else:
                 self.YourDad = True
-            """        
-            else:
-            pass
-
+        else:
             self.vy = self.vy + 1.25
             self.y += self.vy
             self.a = self.collidingWithSprites(wall)
@@ -122,8 +118,6 @@ class player(Sprite):
                 self.YourDad = False
             else:
                 self.YourDad = True
-            """
-
     
     def falling(self, event):
         if self.YourDad == True:
@@ -153,17 +147,21 @@ class player(Sprite):
 
     def JumpOn(self, event):
         if self.You == True:
-            self.vy = -5
+            self.vy = 0
         if len(self.a) == 0:
             self.YourDad = True
         if self.YourUncle == False:
-            if self.YourDad == True:
+            if self.YourDad == True and self.You == False:
                 self.vy = -18
+            if self.YourDad == True and self.You == True:
+                self.vy = -5
         else:
             self.vy = 5
+    
 
     def JumpOff(self, event):
         self. vy = self.vy + 1
+
 #TROPY
 class trophy(Sprite):
     yellow = Color(0xffca28, 1.0)
@@ -216,7 +214,7 @@ class Kong(App):
             ladder(RectangleAsset(10, 170, oline, Blue), (550, 500))
             ladder(RectangleAsset(10, 170, oline, Blue), (300, 500))
             ladder(RectangleAsset(10, 170, oline, Blue), (400, 330))
-            ladder(RectangleAsset(10, 170, oline, Blue), (150, 330))
+            ladder(RectangleAsset(10, 170, oline, Blue), (140, 330))
             ladder(RectangleAsset(10, 100, oline, Blue), (250, 160))
             ladder(RectangleAsset(10, 170, oline, Blue), (330, 160))
             ladder(RectangleAsset(10, 170, oline, Blue), (600, 160))
