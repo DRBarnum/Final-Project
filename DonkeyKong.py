@@ -97,9 +97,10 @@ class player(Sprite):
                 self.YourDad = False
             else:
                 self.YourDad = True
-        else:
+            """        
+            else:
             pass
-            """
+
             self.vy = self.vy + 1.25
             self.y += self.vy
             self.a = self.collidingWithSprites(wall)
