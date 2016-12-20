@@ -18,7 +18,12 @@ class Barrel(Sprite):
         self.vx = 0
         self.vy = 0
         self.vr = 0
+        self.a = self.collidingWithSprites(wall)
+        self.b = self.collidingWithSprites(ladder)
         self.fxcenter = self.fycenter = 0
+        
+        
+   
 # THE WALLS
 class wall(Sprite):
     Red = Color(0xF44366, 1.0)
@@ -56,11 +61,14 @@ class player(Sprite):
         self.vr = 0
         self.a = self.collidingWithSprites(wall)
         self.b = self.collidingWithSprites(ladder)
+        self.c = self.collidingWithSprites(Barrel)
+        self.d = self.collidingWithSprites(trophy)
         self.fxcenter = self.fycenter = 0.25
         self.YourDad = True
         self.YourUncle = False
         self.You = False
         self.YourAunt = False
+        self.lives = 3
         Kong.listenKeyEvent("keydown", "right arrow", self.MoveRIGHT)
         Kong.listenKeyEvent("keyup", "right arrow", self.MoveOff)
         Kong.listenKeyEvent("keydown", "left arrow", self.MoveLEFT)
@@ -69,9 +77,9 @@ class player(Sprite):
         Kong.listenKeyEvent("keyup", "up arrow", self.JumpOff)
         Kong.listenKeyEvent("keydown", "right arrow", self.falling)
         Kong.listenKeyEvent("keydown", "left arrow", self.falling)
-
-       
-
+        Kong.listenKeyEvent("keydown", "down arrow", self.ClimbDOWN)
+        Kong.listenKeyEvent("keyup", "down arrow", self.ClimbOFF)
+    
     def step(self):
         self.b = self.collidingWithSprites(ladder)
         if len(self.b) != 0:
@@ -82,7 +90,7 @@ class player(Sprite):
             if len(self.a) != 0:
                 self.y -= self.vy
                 self.vy = 1
-                self.YourDad = False
+                self.YourDad = True
             else:
                 self.YourDad = True
             if self.YourDad == True:
@@ -97,6 +105,9 @@ class player(Sprite):
                 self.YourDad = False
             else:
                 self.YourDad = True
+        if len(self.b) != 0:
+            self.lives = self.lives - 1
+
         else:
             # OFF LADDER
             self.vy = self.vy + 1.25
@@ -121,6 +132,12 @@ class player(Sprite):
                 self.YourDad = False
             else:
                 self.YourDad = True
+    
+    def ClimbDOWN(self, event):
+        self.vy = 5
+        
+    def ClimbOFF(self, event):
+        self.vy = 0
     
     def falling(self, event):
         if self.YourDad == True:
@@ -193,8 +210,13 @@ class Kong(App):
         bg=Sprite(bg_asset, (0, 0))
         text = TextAsset("Press ENTER To Start", style='40pt Comic Sans MS', fill= Color(0xffeb3b, 1), width=700)
         self.prompt = Sprite(text,(50, 250))
+        TEXT = TextAsset("Press R to Resart", style='40pt Comic Sans Ms', fill= Color(0xffeb3b, 1), width= 700)
+        self.Prompt = Sprite(TEXT,(50, 250))
+        self.Prompt.visible = False
         Kong.listenKeyEvent("keydown", "enter", self.playing)
+        Kong.listenKeyEvent("keydown", "r", self.playing)
 
+    
     def playing(self, event):
         self.prompt.destroy()
         self.play = True
@@ -222,7 +244,7 @@ class Kong(App):
             ladder(RectangleAsset(10, 170, oline, Blue), (330, 160))
             ladder(RectangleAsset(10, 170, oline, Blue), (600, 160))
             ladder(RectangleAsset(10, 110, oline, Blue), (150, 50))
-            trophy(RectangleAsset(25, 25, liner, yellow), (100, 25))
+            trophy(RectangleAsset(25, 25, liner, yellow), (100, 22))
             
     def step(self):
         for ship in self.getSpritesbyClass(player):
