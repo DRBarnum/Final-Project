@@ -52,7 +52,7 @@ class player(Sprite):
     def __init__(self, position):
         super().__init__(player.asset, position)
         self.vx = 0
-        self.vy = 5
+        self.vy = 0
         self.vr = 0
         self.a = self.collidingWithSprites(wall)
         self.b = self.collidingWithSprites(ladder)
@@ -75,6 +75,7 @@ class player(Sprite):
     def step(self):
         self.b = self.collidingWithSprites(ladder)
         if len(self.b) != 0:
+            #ON LADDAR
             self.You = True
             self.y += self.vy
             self.a = self.collidingWithSprites(wall)
@@ -97,9 +98,11 @@ class player(Sprite):
             else:
                 self.YourDad = True
         else:
+            # OFF LADDER
             self.vy = self.vy + 1.25
             self.y += self.vy
             self.a = self.collidingWithSprites(wall)
+            self.You = False
             if len(self.a) != 0:
                 self.y -= self.vy
                 self.vy = 1
@@ -146,21 +149,21 @@ class player(Sprite):
         self.vy = 5
 
     def JumpOn(self, event):
-        if self.You == True:
-            self.vy = 0
         if len(self.a) == 0:
             self.YourDad = True
         if self.YourUncle == False:
-            if self.YourDad == True and self.You == False:
+            if self.YourDad == True and self.You == False: #NOT TOUCHING A LADDER JUMP
                 self.vy = -18
-            if self.YourDad == True and self.You == True:
+            if self.YourDad == True and self.You == True: #TOUCHING A LADDER JUMP
                 self.vy = -5
         else:
-            self.vy = 5
+            self.vy = -5
     
-
     def JumpOff(self, event):
-        self. vy = self.vy + 1
+        if self.You == False:
+            self. vy = self.vy + 1
+        if self.You == True:
+            self.vy = 0
 
 #TROPY
 class trophy(Sprite):
