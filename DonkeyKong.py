@@ -251,8 +251,7 @@ class Kong(App):
             ladder(RectangleAsset(10, 170, oline, Blue), (600, 160))
             ladder(RectangleAsset(10, 110, oline, Blue), (150, 50))
             trophy(RectangleAsset(25, 25, liner, yellow), (100, 22))
-            if self.won == True:
-                self.play = False
+
     
     def step(self):
         for ship in self.getSpritesbyClass(player):
