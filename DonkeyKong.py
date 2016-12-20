@@ -21,9 +21,7 @@ class Barrel(Sprite):
         self.a = self.collidingWithSprites(wall)
         self.b = self.collidingWithSprites(ladder)
         self.fxcenter = self.fycenter = 0
-        
-        
-   
+
 # THE WALLS
 class wall(Sprite):
     Red = Color(0xF44366, 1.0)
@@ -36,6 +34,7 @@ class wall(Sprite):
         self.vy = 0
         self.vr = 0
         self.fxcenter = self.fycenter = 0
+        
 # LADDER
 class ladder(Sprite):
     Blue = Color(0x558b24, 1.0)
@@ -47,6 +46,7 @@ class ladder(Sprite):
         self.vy = 0
         self.vr = 0
         self.fxcenter = self.fycenter = 0
+        
 # PLAYER
 class player(Sprite):
     purple = Color(0x9575cd, 1.0)
@@ -68,6 +68,7 @@ class player(Sprite):
         self.YourUncle = False
         self.You = False
         self.YourAunt = False
+        self.won = False
         self.lives = 3
         Kong.listenKeyEvent("keydown", "right arrow", self.MoveRIGHT)
         Kong.listenKeyEvent("keyup", "right arrow", self.MoveOff)
@@ -105,9 +106,10 @@ class player(Sprite):
                 self.YourDad = False
             else:
                 self.YourDad = True
-        if len(self.b) != 0:
-            self.lives = self.lives - 1
-
+            if len(self.b) != 0:
+                self.lives = self.lives - 1
+            if len(self.d) != 0:
+                self.won = True
         else:
             # OFF LADDER
             self.vy = self.vy + 1.25
@@ -132,6 +134,8 @@ class player(Sprite):
                 self.YourDad = False
             else:
                 self.YourDad = True
+            if len(self.d) != 0:
+                self.won = True
     
     def ClimbDOWN(self, event):
         self.vy = 5
@@ -194,6 +198,7 @@ class trophy(Sprite):
         self.vy = 0
         self.vr = 0
         self.fxcenter = self.fycenter = 0
+        
 # THE WORLD
 class Kong(App):
     
@@ -215,6 +220,7 @@ class Kong(App):
         self.Prompt.visible = False
         Kong.listenKeyEvent("keydown", "enter", self.playing)
         Kong.listenKeyEvent("keydown", "r", self.playing)
+        
 
     
     def playing(self, event):
@@ -245,10 +251,13 @@ class Kong(App):
             ladder(RectangleAsset(10, 170, oline, Blue), (600, 160))
             ladder(RectangleAsset(10, 110, oline, Blue), (150, 50))
             trophy(RectangleAsset(25, 25, liner, yellow), (100, 22))
-            
+            if self.won == True:
+                self.play = False
+    
     def step(self):
         for ship in self.getSpritesbyClass(player):
             ship.step()
+            
 # I DON'T KNOW WHAT THIS IS BUT I NEED IT
 myapp = Kong(SCREEN_WIDTH, SCREEN_HEIGHT)
 myapp.run()
