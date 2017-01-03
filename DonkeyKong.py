@@ -243,19 +243,20 @@ class Kong(App):
             wall(RectangleAsset(600, 30, oline, Red), (0, 160))
             wall(RectangleAsset(100, 30, oline, Red), (100, 50))
             ladder(RectangleAsset(10, 170, oline, Blue), (550, 500))
-            ladder(RectangleAsset(10, 170, oline, Blue), (300, 500))
-            ladder(RectangleAsset(10, 170, oline, Blue), (400, 330))
             ladder(RectangleAsset(10, 170, oline, Blue), (140, 330))
-            ladder(RectangleAsset(10, 100, oline, Blue), (250, 160))
-            ladder(RectangleAsset(10, 170, oline, Blue), (330, 160))
             ladder(RectangleAsset(10, 170, oline, Blue), (600, 160))
-            ladder(RectangleAsset(10, 110, oline, Blue), (150, 50))
             trophy(RectangleAsset(25, 25, liner, yellow), (100, 22))
 
     
     def step(self):
         for ship in self.getSpritesbyClass(player):
             ship.step()
+            
+    def step(self):
+        for hip in self.getSpritesbyClass(Barrel):
+            ship.step()
+            
+        Barrel ((100, 50))
             
 # I DON'T KNOW WHAT THIS IS BUT I NEED IT
 myapp = Kong(SCREEN_WIDTH, SCREEN_HEIGHT)
