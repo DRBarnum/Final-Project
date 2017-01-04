@@ -10,17 +10,16 @@ class Barrel(Sprite):
     Black = Color(1,0)
     yellow = Color(0xfdd835, 1.0)
     noline = LineStyle(1, Black)
-    asset = CircleAsset(25, noline, brown)
-
+    asset= CircleAsset(15, noline, brown)
     
     def __init__(self, position):
         super().__init__(Barrel.asset, position)
         self.vx = 0
         self.vy = 0
         self.vr = 0
-        self.a = self.collidingWithSprites(wall)
-        self.b = self.collidingWithSprites(ladder)
-        self.fxcenter = self.fycenter = 0
+        #self.a = self.collidingWithSprites(wall)
+        #self.b = self.collidingWithSprites(ladder)
+        self.fxcenter = self.fycenter = 0.25
 
 # THE WALLS
 class wall(Sprite):
@@ -228,6 +227,7 @@ class Kong(App):
         self.play = True
         if self.play == True:
             player((50, 640))
+            Barrel((70, 145))
             black=Color(1, 0)
             Black=Color(0, 1)
             Red = Color(0xF44366, 1.0)
@@ -236,6 +236,7 @@ class Kong(App):
             white = Color(0xfafafa, 1.0)
             yellow = Color(0xffca28, 1.0)
             liner = LineStyle(1, white)
+            brown = Color(0x996633, 1.0)
             Blue = Color(0x558b24, 1.0)
             wall(RectangleAsset(700, 30, oline, Red), (0, 670))
             wall(RectangleAsset(550, 30, oline, Red), (0, 500))
@@ -247,16 +248,15 @@ class Kong(App):
             ladder(RectangleAsset(10, 170, oline, Blue), (600, 160))
             trophy(RectangleAsset(25, 25, liner, yellow), (100, 22))
 
+
     
     def step(self):
         for ship in self.getSpritesbyClass(player):
             ship.step()
-            
-    def step(self):
         for hip in self.getSpritesbyClass(Barrel):
-            ship.step()
-            
-        Barrel ((100, 50))
+            hip.step()
+
+
             
 # I DON'T KNOW WHAT THIS IS BUT I NEED IT
 myapp = Kong(SCREEN_WIDTH, SCREEN_HEIGHT)
