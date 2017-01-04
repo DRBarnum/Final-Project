@@ -4,22 +4,7 @@ from ggame import App, RectangleAsset, ImageAsset, Sprite, LineStyle, Color, Fra
 SCREEN_WIDTH = 700
 SCREEN_HEIGHT = 700
 
-# Barrel
-class Barrel(Sprite):
-    brown = Color(0x996633, 1.0)
-    Black = Color(1,0)
-    yellow = Color(0xfdd835, 1.0)
-    noline = LineStyle(1, Black)
-    asset= CircleAsset(15, noline, brown)
-    
-    def __init__(self, position):
-        super().__init__(Barrel.asset, position)
-        self.vx = 0
-        self.vy = 0
-        self.vr = 0
-        #self.a = self.collidingWithSprites(wall)
-        #self.b = self.collidingWithSprites(ladder)
-        self.fxcenter = self.fycenter = 0.25
+
 
 # THE WALLS
 class wall(Sprite):
@@ -45,6 +30,23 @@ class ladder(Sprite):
         self.vy = 0
         self.vr = 0
         self.fxcenter = self.fycenter = 0
+
+# Barrel
+class Barrel(Sprite):
+    brown = Color(0x996633, 1.0)
+    Black = Color(1,0)
+    yellow = Color(0xfdd835, 1.0)
+    noline = LineStyle(1, Black)
+    asset= CircleAsset(15, noline, brown)
+    
+    def __init__(self, position):
+        super().__init__(Barrel.asset, position)
+        self.vx = 0
+        self.vy = 0
+        self.vr = 0
+        #self.a = self.collidingWithSprites(wall)
+        #self.b = self.collidingWithSprites(ladder)
+        self.fxcenter = self.fycenter = 0.25
         
 # PLAYER
 class player(Sprite):
@@ -219,7 +221,7 @@ class Kong(App):
         self.Prompt.visible = False
         Kong.listenKeyEvent("keydown", "enter", self.playing)
         Kong.listenKeyEvent("keydown", "r", self.playing)
-        
+
 
     
     def playing(self, event):
@@ -227,7 +229,7 @@ class Kong(App):
         self.play = True
         if self.play == True:
             player((50, 640))
-            #Barrel((70, 145))
+            Barrel((70, 145))
             black=Color(1, 0)
             Black=Color(0, 1)
             Red = Color(0xF44366, 1.0)
