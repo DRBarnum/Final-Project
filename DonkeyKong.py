@@ -227,7 +227,7 @@ class Kong(App):
         self.play = True
         if self.play == True:
             player((50, 640))
-            Barrel((70, 145))
+            #Barrel((70, 145))
             black=Color(1, 0)
             Black=Color(0, 1)
             Red = Color(0xF44366, 1.0)
