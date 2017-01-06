@@ -44,9 +44,37 @@ class Barrel(Sprite):
         self.vx = 0
         self.vy = 0
         self.vr = 0
-        #self.a = self.collidingWithSprites(wall)
-        #self.b = self.collidingWithSprites(ladder)
+        self.hit = False
+        self.falling = False
+        self.mover = False
+        self.movel = False
+        self.p = self.collidingWithSprites(player)
         self.fxcenter = self.fycenter = 0.25
+    
+    def step(self):
+        self.x += self.vx
+        self.y += self.vy
+        if self.mover == True:
+            self.vy = 0
+            self.vx = -2.5
+        if self.movel == True:
+            self.vy = 0
+            self.vx = 2.5
+        if self.falling == True:
+            self.vy = 2.5
+            self.vx = 0
+        if self.y == 120:
+            self.falling = False
+            self.mover = True
+        if self.x == 620 and self.y == 120:
+            self.mover = False
+            self.falling = True
+        if self.y == 330:
+            self.falling = False
+            self.movel = True
+        if len(self.p) != 0:
+           self.hit = True
+        
         
 # PLAYER
 class player(Sprite):
