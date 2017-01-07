@@ -4,13 +4,10 @@ from ggame import App, RectangleAsset, ImageAsset, Sprite, LineStyle, Color, Fra
 SCREEN_WIDTH = 700
 SCREEN_HEIGHT = 700
 
-
-
 # THE WALLS
 class wall(Sprite):
     Red = Color(0xF44366, 1.0)
     noline = LineStyle(0, Red)
-
     
     def __init__(self, asset, position):
         super().__init__(asset, position)
@@ -56,24 +53,38 @@ class Barrel(Sprite):
         self.y += self.vy
         if self.mover == True:
             self.vy = 0
-            self.vx = -2.5
+            self.vx = 2.5
         if self.movel == True:
             self.vy = 0
-            self.vx = 2.5
+            self.vx = -2.5
         if self.falling == True:
             self.vy = 2.5
             self.vx = 0
-        if self.y == 120:
+        if self.y == 145:
             self.falling = False
             self.mover = True
-        if self.x == 620 and self.y == 120:
+        if self.x >= 620 and self.y == 145:
             self.mover = False
             self.falling = True
-        if self.y == 330:
+        if self.y >= 312 and self.x >= 620:
+            self.falling = False
+            self.movel = True
+        if self.x <= 130 and self.y >= 312:
+            self.movel = False
+            self.falling = True
+        if self.x <= 130 and self.y >= 482:
+            self.falling = False
+            self.mover = True
+        if self.x >= 569 and self.y >= 482:
+            self.mover = False
+            self.falling = True
+        if self.y >= 651:
             self.falling = False
             self.movel = True
         if len(self.p) != 0:
            self.hit = True
+        if self.hit == True:
+            
         
         
 # PLAYER
@@ -285,7 +296,8 @@ class Kong(App):
             ship.step()
         for hip in self.getSpritesbyClass(Barrel):
             hip.step()
-
+            if hip.x <= 0:
+                hip.destroy()
 
             
 # I DON'T KNOW WHAT THIS IS BUT I NEED IT
