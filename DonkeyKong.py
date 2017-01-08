@@ -81,9 +81,8 @@ class Barrel(Sprite):
         if self.y >= 651:
             self.falling = False
             self.movel = True
-        if len(self.p) != 0:
-           self.hit = True
-        if self.hit == True:
+
+
             
         
         
@@ -110,6 +109,7 @@ class player(Sprite):
         self.YourAunt = False
         self.won = False
         self.lives = 3
+        self.hit = False
         Kong.listenKeyEvent("keydown", "right arrow", self.MoveRIGHT)
         Kong.listenKeyEvent("keyup", "right arrow", self.MoveOff)
         Kong.listenKeyEvent("keydown", "left arrow", self.MoveLEFT)
@@ -176,6 +176,11 @@ class player(Sprite):
                 self.YourDad = True
             if len(self.d) != 0:
                 self.won = True
+            if len(self.c) != 0:
+                self.hit = True
+            if self.hit == True:
+                self.lives = self.lives - 1
+                self.hit = False
     
     def ClimbDOWN(self, event):
         self.vy = 5
