@@ -1,5 +1,6 @@
 import ggame
 from ggame import App, RectangleAsset, ImageAsset, Sprite, LineStyle, Color, Frame, CircleAsset, PolygonAsset, TextAsset
+import random
 
 SCREEN_WIDTH = 700
 SCREEN_HEIGHT = 700
@@ -150,6 +151,10 @@ class player(Sprite):
                 self.lives = self.lives - 1
             if len(self.d) != 0:
                 self.won = True
+            if len(self.c) != 0:
+                self.lives = self.lives - 1
+                
+            
         else:
             # OFF LADDER
             self.vy = self.vy + 1.25
@@ -180,7 +185,7 @@ class player(Sprite):
                 self.hit = True
             if self.hit == True:
                 self.lives = self.lives - 1
-                self.hit = False
+            
     
     def ClimbDOWN(self, event):
         self.vy = 5
@@ -261,8 +266,11 @@ class Kong(App):
         text = TextAsset("Press ENTER To Start", style='40pt Comic Sans MS', fill= Color(0xffeb3b, 1), width=700)
         self.prompt = Sprite(text,(50, 250))
         TEXT = TextAsset("Press R to Resart", style='40pt Comic Sans Ms', fill= Color(0xffeb3b, 1), width= 700)
+        Text = TextAsset("Lives " + (self.lives), style = '40pt Comic Sans Ms', fill= Color(0xffe3b, 1), width=100)
         self.Prompt = Sprite(TEXT,(50, 250))
+        self.PrompT = Sprite(Text(500, 10))
         self.Prompt.visible = False
+        self.count = 0
         Kong.listenKeyEvent("keydown", "enter", self.playing)
         Kong.listenKeyEvent("keydown", "r", self.playing)
 
@@ -293,7 +301,7 @@ class Kong(App):
             ladder(RectangleAsset(10, 170, oline, Blue), (140, 330))
             ladder(RectangleAsset(10, 170, oline, Blue), (600, 160))
             trophy(RectangleAsset(25, 25, liner, yellow), (100, 22))
-
+            
 
     
     def step(self):
@@ -303,6 +311,11 @@ class Kong(App):
             hip.step()
             if hip.x <= 0:
                 hip.destroy()
+        self.count = self.count + 1
+        if self.count == 250:
+            Barrel((70, 145))
+            self.count = 0
+            
 
             
 # I DON'T KNOW WHAT THIS IS BUT I NEED IT
