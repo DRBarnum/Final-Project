@@ -42,11 +42,9 @@ class Barrel(Sprite):
         self.vx = 0
         self.vy = 0
         self.vr = 0
-        self.hit = False
         self.falling = False
         self.mover = False
         self.movel = False
-        self.p = self.collidingWithSprites(player)
         self.fxcenter = self.fycenter = 0.25
     
     def step(self):
@@ -83,10 +81,6 @@ class Barrel(Sprite):
             self.falling = False
             self.movel = True
 
-
-            
-        
-        
 # PLAYER
 class player(Sprite):
     purple = Color(0x9575cd, 1.0)
@@ -109,9 +103,7 @@ class player(Sprite):
         self.You = False
         self.YourAunt = False
         self.won = False
-        self.lost = False
         self.lives = 3
-        self.hit = False
         Kong.listenKeyEvent("keydown", "right arrow", self.MoveRIGHT)
         Kong.listenKeyEvent("keyup", "right arrow", self.MoveOff)
         Kong.listenKeyEvent("keydown", "left arrow", self.MoveLEFT)
@@ -148,16 +140,13 @@ class player(Sprite):
                 self.YourDad = False
             else:
                 self.YourDad = True
-            if len(self.b) != 0:
-                self.lives = self.lives - 1
             if len(self.d) != 0:
                 self.won = True
             if len(self.c) != 0:
+                print("Hey")
                 self.lives = self.lives - 1
-            if self.lives == 0:
-                self.lost = True
-                
-            
+
+
         else:
             # OFF LADDER
             self.vy = self.vy + 1.25
@@ -185,10 +174,9 @@ class player(Sprite):
             if len(self.d) != 0:
                 self.won = True
             if len(self.c) != 0:
-                self.hit = True
-            if self.hit == True:
+                print("Hi")
                 self.lives = self.lives - 1
-            
+                
     
     def ClimbDOWN(self, event):
         self.vy = 5
@@ -268,17 +256,13 @@ class Kong(App):
         bg=Sprite(bg_asset, (0, 0))
         text = TextAsset("Press ENTER To Start", style='40pt Comic Sans MS', fill= Color(0xffeb3b, 1), width=700)
         self.prompt = Sprite(text,(50, 250))
-        TEXT = TextAsset("GameOver", style='40pt Comic Sans Ms', fill= Color(0xffeb3b, 1), width= 700)
-        
-        self.Prompt = Sprite(TEXT,(50, 250))
-
+        TEXT = TextAsset("Game Over", style='40pt Comic Sans Ms', fill= Color(0xffeb3b, 1), width= 700)
+        self.Prompt = Sprite(TEXT,(350, 350))
+        self.prompt.visible = True
         self.Prompt.visible = False
         self.count = 0
         Kong.listenKeyEvent("keydown", "enter", self.playing)
-        Kong.listenKeyEvent("keydown", "r", self.playing)
 
-
-    
     def playing(self, event):
         self.prompt.destroy()
         self.play = True
@@ -304,16 +288,14 @@ class Kong(App):
             ladder(RectangleAsset(10, 170, oline, Blue), (140, 330))
             ladder(RectangleAsset(10, 170, oline, Blue), (600, 160))
             trophy(RectangleAsset(25, 25, liner, yellow), (100, 22))
-
-            
-            
-
     
     def step(self):
         for ship in self.getSpritesbyClass(player):
-            if ship[0].lost == True:
-                self.Prompt.visable = True
             ship.step()
+            if ship.lives == 0:
+                self.Prompt.visible = True
+                print("Hello")
+
         for hip in self.getSpritesbyClass(Barrel):
             hip.step()
             if hip.x <= 0:
@@ -322,9 +304,7 @@ class Kong(App):
         if self.count == 250:
             Barrel((70, 145))
             self.count = 0
-            
 
-            
 # I DON'T KNOW WHAT THIS IS BUT I NEED IT
 myapp = Kong(SCREEN_WIDTH, SCREEN_HEIGHT)
 myapp.run()
