@@ -22,17 +22,17 @@ Your specification **should include** the following types of information:
 
 * If there are graphics screens involved, describe every screen that the user will experience: what is it for? 
     What did the user have to do to get there and how does she move on to the next?
- There will be four main screens. The start menu. This will be a blank screen with the words "Hit ENTER to start". The next screen will be the play screen. This is the 5 story tower with the player on the bottom and the trophy at the top. The next two screens are very similar. If the player loses all three lives then a screen will display "You Lose! Hit Q to Quit or R to Restart." or if the player gets to the top the screen will display "You Win! Hit Q to Quit or R to Restart". 
+ There will be three main screens. The start menu. This will be a blank screen with the words "Hit ENTER to start". The next screen will be the play screen. This is the 5 story tower with the player on the bottom and the trophy at the top. The next two screens are very similar. If the player loses all three lives then a screen will display "Game Over" or if the player gets to the top the screen will display "Game Over". 
 
 * For each graphics screen, describe every active control input and what it does. What elements on the screen will
   change in response to user input?
-    The first screen will have one control. The enter key will move you into the game. The second screen will have a lot of controls. The player will be able to move left, right, jump and climb up or down ladders. The barreles will not be controled by the player but they will have to roll down the screen and randomly (at least random enough where the player can't just predict their movement) skip ladders or go down them. The last two screens will have two controls. The q key will quit the game or the R key will restart the game.
+    The first screen will have one control. The enter key will move you into the game. The second screen will have a lot of controls. The player will be able to move left, right, jump and climb up or down ladders. The barreles will not be controled by the player but they will have to roll down the screen.
 
 * Does the program respond to mouse input? What, exactly, does the mouse do?
   There will be no mouse input.
 
 * Does the program respond to keyboard input? How?
-  The arrow keys will each be used. The left and right keys will move the player left and right. The up arrow will either make the player jump or climb up ladders. The down arrow will make the player climb down ladders. The Q, R, and ENTER key will also be used. The R key will be used in the Win and Lose screen to restart the game. The Q key will also be used in those two screens to quit the game. The ENTER key will be used in the first screen to start the game.
+  The arrow keys will each be used. The left and right keys will move the player left and right. The up arrow will either make the player jump or climb up ladders. The down arrow will make the player climb down ladders. The ENTER key will also be used. The ENTER key will be used in the first screen to start the game.
 
 * What graphical assets will be used?
  There will be no graphics in this game other than movement.
