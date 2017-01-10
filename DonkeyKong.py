@@ -109,6 +109,7 @@ class player(Sprite):
         self.You = False
         self.YourAunt = False
         self.won = False
+        self.lost = False
         self.lives = 3
         self.hit = False
         Kong.listenKeyEvent("keydown", "right arrow", self.MoveRIGHT)
@@ -153,6 +154,8 @@ class player(Sprite):
                 self.won = True
             if len(self.c) != 0:
                 self.lives = self.lives - 1
+            if self.lives == 0:
+                self.lost = True
                 
             
         else:
@@ -265,10 +268,10 @@ class Kong(App):
         bg=Sprite(bg_asset, (0, 0))
         text = TextAsset("Press ENTER To Start", style='40pt Comic Sans MS', fill= Color(0xffeb3b, 1), width=700)
         self.prompt = Sprite(text,(50, 250))
-        TEXT = TextAsset("Press R to Resart", style='40pt Comic Sans Ms', fill= Color(0xffeb3b, 1), width= 700)
-        Text = TextAsset("Lives " + (self.lives), style = '40pt Comic Sans Ms', fill= Color(0xffe3b, 1), width=100)
+        TEXT = TextAsset("GameOver", style='40pt Comic Sans Ms', fill= Color(0xffeb3b, 1), width= 700)
+        
         self.Prompt = Sprite(TEXT,(50, 250))
-        self.PrompT = Sprite(Text(500, 10))
+
         self.Prompt.visible = False
         self.count = 0
         Kong.listenKeyEvent("keydown", "enter", self.playing)
@@ -301,11 +304,15 @@ class Kong(App):
             ladder(RectangleAsset(10, 170, oline, Blue), (140, 330))
             ladder(RectangleAsset(10, 170, oline, Blue), (600, 160))
             trophy(RectangleAsset(25, 25, liner, yellow), (100, 22))
+
+            
             
 
     
     def step(self):
         for ship in self.getSpritesbyClass(player):
+            if ship[0].lost == True:
+                self.Prompt.visable = True
             ship.step()
         for hip in self.getSpritesbyClass(Barrel):
             hip.step()
