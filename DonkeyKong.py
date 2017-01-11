@@ -103,7 +103,8 @@ class player(Sprite):
         self.You = False
         self.YourAunt = False
         self.won = False
-        self.lives = 3
+        self.lives = 30
+        self.visible = True
         Kong.listenKeyEvent("keydown", "right arrow", self.MoveRIGHT)
         Kong.listenKeyEvent("keyup", "right arrow", self.MoveOff)
         Kong.listenKeyEvent("keydown", "left arrow", self.MoveLEFT)
@@ -117,6 +118,8 @@ class player(Sprite):
     
     def step(self):
         self.b = self.collidingWithSprites(ladder)
+        self.c = self.collidingWithSprites(Barrel)
+        self.d = self.collidingWithSprites(trophy)
         if len(self.b) != 0:
             #ON LADDAR
             self.You = True
@@ -143,9 +146,9 @@ class player(Sprite):
             if len(self.d) != 0:
                 self.won = True
             if len(self.c) != 0:
-                print("Hey")
                 self.lives = self.lives - 1
-
+            if self.lives == 0 or self.won == True:
+                self.visible = False
 
         else:
             # OFF LADDER
@@ -174,8 +177,9 @@ class player(Sprite):
             if len(self.d) != 0:
                 self.won = True
             if len(self.c) != 0:
-                print("Hi")
                 self.lives = self.lives - 1
+            if self.lives == 0 or self.won == True:
+                self.visible = False
                 
     
     def ClimbDOWN(self, event):
@@ -226,6 +230,8 @@ class player(Sprite):
             self. vy = self.vy + 1
         if self.You == True:
             self.vy = 0
+    
+
 
 #TROPY
 class trophy(Sprite):
@@ -261,6 +267,7 @@ class Kong(App):
         self.prompt.visible = True
         self.Prompt.visible = False
         self.count = 0
+        self.lost = False
         Kong.listenKeyEvent("keydown", "enter", self.playing)
 
     def playing(self, event):
@@ -288,13 +295,18 @@ class Kong(App):
             ladder(RectangleAsset(10, 170, oline, Blue), (140, 330))
             ladder(RectangleAsset(10, 170, oline, Blue), (600, 160))
             trophy(RectangleAsset(25, 25, liner, yellow), (100, 22))
+        
+            
+        
     
     def step(self):
         for ship in self.getSpritesbyClass(player):
             ship.step()
-            if ship.lives == 0:
+            if ship.lives == 0 or ship.won == True:
                 self.Prompt.visible = True
-                print("Hello")
+            if ship.won == True:
+                self.Prompt.visible = True
+                
 
         for hip in self.getSpritesbyClass(Barrel):
             hip.step()
