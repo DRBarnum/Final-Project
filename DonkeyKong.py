@@ -302,6 +302,8 @@ class Kong(App):
     def step(self):
         for ship in self.getSpritesbyClass(player):
             ship.step()
+            if ship.x >= 680 or ship.x <= 0:
+                ship.vx = 0
             if ship.lives == 0 or ship.won == True:
                 self.Prompt.visible = True
             if ship.won == True:
